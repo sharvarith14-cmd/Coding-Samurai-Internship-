@@ -1,0 +1,193 @@
+# Project 2: To-Do List Application
+
+## Description
+A command-line to-do list application where users can add, delete, view, search, and mark tasks as important. Tasks are automatically saved to a file for persistence.
+
+## Skills Learned
+- ✅ List data structures
+- ✅ File handling (read/write)
+- ✅ Functions and parameters
+- ✅ Loops and conditionals
+- ✅ String manipulation
+- ✅ DateTime module
+- ✅ Error handling
+
+## How to Run
+```bash
+python todo_list_app.py
+```
+
+## Features
+✅ View all tasks
+✅ Add new tasks with timestamp
+✅ Delete tasks by number
+✅ Search tasks by keyword
+✅ Mark tasks as important (⭐)
+✅ Auto-save to file
+✅ Persistent storage (tasks survive restart)
+
+## Code Structure
+```
+- load_tasks()          → Load tasks from file
+- save_tasks()          → Save tasks to file
+- view_tasks()          → Display all tasks
+- add_task()            → Add new task with timestamp
+- delete_task()         → Delete task by number
+- search_task()         → Search by keyword
+- mark_task_important() → Mark with star
+- show_menu()           → Display menu
+- main()                → Main program loop
+```
+
+## Sample Output
+
+### Example 1: Starting the App
+```
+🎯 Welcome to To-Do List App!
+📌 Loaded 0 existing tasks!
+
+============================================================
+              TO-DO LIST APPLICATION
+============================================================
+
+1. View all tasks
+2. Add a new task
+3. Delete a task
+4. Search tasks
+5. Mark task as important ⭐
+6. Save & Exit
+
+============================================================
+
+Enter your choice (1-6): 
+```
+
+### Example 2: Adding Tasks
+```
+Enter your choice (1-6): 2
+
+------------------------------------------------------------
+📝 Enter your task: Complete Python assignment
+✅ Task added: 'Complete Python assignment'
+------------------------------------------------------------
+```
+
+### Example 3: Viewing Tasks
+```
+Enter your choice (1-6): 1
+
+============================================================
+                    YOUR TO-DO LIST
+============================================================
+
+📋 Total Tasks: 3
+
+1. Complete Python assignment [Added: 2024-07-19 10:30:45]
+2. Study for exam [Added: 2024-07-19 11:15:20]
+3. Attend meeting [Added: 2024-07-19 14:00:00]
+
+============================================================
+```
+
+### Example 4: Deleting a Task
+```
+Enter your choice (1-6): 3
+
+============================================================
+                    YOUR TO-DO LIST
+============================================================
+
+📋 Total Tasks: 3
+
+1. Complete Python assignment [Added: 2024-07-19 10:30:45]
+2. Study for exam [Added: 2024-07-19 11:15:20]
+3. Attend meeting [Added: 2024-07-19 14:00:00]
+
+============================================================
+
+------------------------------------------------------------
+Enter task number to delete: 2
+✅ Task deleted: 'Study for exam [Added: 2024-07-19 11:15:20]'
+------------------------------------------------------------
+```
+
+### Example 5: Searching Tasks
+```
+Enter your choice (1-6): 4
+
+------------------------------------------------------------
+🔍 Enter keyword to search: Python
+
+🔎 Search Results:
+1. Complete Python assignment [Added: 2024-07-19 10:30:45]
+------------------------------------------------------------
+```
+
+### Example 6: Marking Task as Important
+```
+Enter your choice (1-6): 5
+
+============================================================
+                    YOUR TO-DO LIST
+============================================================
+
+📋 Total Tasks: 2
+
+1. Complete Python assignment [Added: 2024-07-19 10:30:45]
+2. Attend meeting [Added: 2024-07-19 14:00:00]
+
+============================================================
+
+------------------------------------------------------------
+Enter task number to mark as important: 1
+✅ Task marked as important!
+------------------------------------------------------------
+```
+
+### Example 7: Viewing After Marking Important
+```
+Enter your choice (1-6): 1
+
+============================================================
+                    YOUR TO-DO LIST
+============================================================
+
+📋 Total Tasks: 2
+
+1. ⭐ Complete Python assignment [Added: 2024-07-19 10:30:45]
+2. Attend meeting [Added: 2024-07-19 14:00:00]
+
+============================================================
+```
+
+### Example 8: Exiting (Save)
+```
+Enter your choice (1-6): 6
+✓ Tasks saved successfully!
+
+👋 Thank you for using To-Do List App! Goodbye!
+```
+
+## File Generated
+When you run the app, it creates:
+- `tasks.txt` - Contains all your saved tasks
+
+## What I Learned
+1. **File I/O** - Reading and writing files
+2. **Data Structures** - Working with lists
+3. **DateTime** - Adding timestamps to tasks
+4. **String Methods** - Searching and filtering
+5. **Persistent Storage** - Saving data between sessions
+6. **User Experience** - Creating interactive menus
+
+## Advanced Features
+- Timestamp on each task (shows when it was added)
+- Search functionality with case-insensitive matching
+- Star marking for priority tasks
+- Input validation
+- Error handling for file operations
+
+---
+**Status:** ✅ Completed  
+**Level:** Level 1 - Beginner  
+**Date:** 2024
