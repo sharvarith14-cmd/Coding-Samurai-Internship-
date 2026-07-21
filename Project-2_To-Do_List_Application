@@ -1,0 +1,204 @@
+"""
+PROJECT 2: TO-DO LIST APPLICATION
+Coding Samurai Internship - Level 1 (Beginner)
+Author: Sharvari Thakur
+Description: A command-line to-do list app with add, delete, view, and file storage features
+"""
+
+import os
+from datetime import datetime
+
+# File where tasks will be saved
+TASKS_FILE = "tasks.txt"
+
+
+def load_tasks():
+    """Load tasks from file if it exists"""
+    if os.path.exists(TASKS_FILE):
+        with open(TASKS_FILE, 'r') as file:
+            tasks = file.readlines()
+            # Remove newline characters
+            tasks = [task.strip() for task in tasks]
+            return tasks
+    return []
+
+
+def save_tasks(tasks):
+    """Save tasks to file"""
+    with open(TASKS_FILE, 'w') as file:
+        for task in tasks:
+            file.write(task + '\n')
+    print("✓ Tasks saved successfully!")
+
+
+def view_tasks(tasks):
+    """Display all tasks"""
+    print("\n" + "="*60)
+    print("                    YOUR TO-DO LIST")
+    print("="*60)
+    
+    if not tasks:
+        print("\n📭 No tasks yet! Add some tasks to get started.")
+    else:
+        print(f"\n📋 Total Tasks: {len(tasks)}\n")
+        for index, task in enumerate(tasks, 1):
+            print(f"{index}. {task}")
+    
+    print("="*60 + "\n")
+
+
+def add_task(tasks):
+    """Add a new task"""
+    print("\n" + "-"*60)
+    task = input("📝 Enter your task: ").strip()
+    
+    if task == "":
+        print("❌ Task cannot be empty!")
+        return tasks
+    
+    # Add timestamp to task
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    full_task = f"{task} [Added: {timestamp}]"
+    
+    tasks.append(full_task)
+    print(f"✅ Task added: '{task}'")
+    print("-"*60 + "\n")
+    
+    return tasks
+
+
+def delete_task(tasks):
+    """Delete a task by number"""
+    if not tasks:
+        print("\n❌ No tasks to delete!")
+        return tasks
+    
+    view_tasks(tasks)
+    print("-"*60)
+    
+    try:
+        task_num = int(input("Enter task number to delete: "))
+        
+        if 1 <= task_num <= len(tasks):
+            removed_task = tasks.pop(task_num - 1)
+            print(f"✅ Task deleted: '{removed_task}'")
+        else:
+            print(f"❌ Invalid task number! Please enter 1-{len(tasks)}")
+    
+    except ValueError:
+        print("❌ Invalid input! Please enter a number.")
+    
+    print("-"*60 + "\n")
+    return tasks
+
+
+def search_task(tasks):
+    """Search for a task by keyword"""
+    if not tasks:
+        print("\n❌ No tasks to search!")
+        return
+    
+    print("\n" + "-"*60)
+    keyword = input("🔍 Enter keyword to search: ").lower().strip()
+    
+    if keyword == "":
+        print("❌ Search keyword cannot be empty!")
+        return
+    
+    print("\n🔎 Search Results:")
+    found = False
+    for index, task in enumerate(tasks, 1):
+        if keyword in task.lower():
+            print(f"{index}. {task}")
+            found = True
+    
+    if not found:
+        print("❌ No matching tasks found.")
+    
+    print("-"*60 + "\n")
+
+
+def mark_task_important(tasks):
+    """Mark a task as important with a star"""
+    if not tasks:
+        print("\n❌ No tasks to mark!")
+        return tasks
+    
+    view_tasks(tasks)
+    print("-"*60)
+    
+    try:
+        task_num = int(input("Enter task number to mark as important: "))
+        
+        if 1 <= task_num <= len(tasks):
+            # Check if already marked
+            if "⭐" in tasks[task_num - 1]:
+                print("⚠️  Already marked as important!")
+            else:
+                tasks[task_num - 1] = "⭐ " + tasks[task_num - 1]
+                print(f"✅ Task marked as important!")
+        else:
+            print(f"❌ Invalid task number! Please enter 1-{len(tasks)}")
+    
+    except ValueError:
+        print("❌ Invalid input! Please enter a number.")
+    
+    print("-"*60 + "\n")
+    return tasks
+
+
+def show_menu():
+    """Display main menu"""
+    print("\n" + "="*60)
+    print("              TO-DO LIST APPLICATION")
+    print("="*60)
+    print("\n1. View all tasks")
+    print("2. Add a new task")
+    print("3. Delete a task")
+    print("4. Search tasks")
+    print("5. Mark task as important ⭐")
+    print("6. Save & Exit")
+    print("="*60 + "\n")
+
+
+def main():
+    """Main application function"""
+    print("\n🎯 Welcome to To-Do List App!")
+    
+    # Load existing tasks
+    tasks = load_tasks()
+    
+    if tasks:
+        print(f"📌 Loaded {len(tasks)} existing tasks!")
+    
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1-6): ").strip()
+        
+        if choice == '1':
+            view_tasks(tasks)
+        
+        elif choice == '2':
+            tasks = add_task(tasks)
+        
+        elif choice == '3':
+            tasks = delete_task(tasks)
+        
+        elif choice == '4':
+            search_task(tasks)
+        
+        elif choice == '5':
+            tasks = mark_task_important(tasks)
+        
+        elif choice == '6':
+            save_tasks(tasks)
+            print("\n👋 Thank you for using To-Do List App! Goodbye!")
+            break
+        
+        else:
+            print("❌ Invalid choice! Please enter 1-6.")
+
+
+# Run the application
+if __name__ == "__main__":
+    main()
