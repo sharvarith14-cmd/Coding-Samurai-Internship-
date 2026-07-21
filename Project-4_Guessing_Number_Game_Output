@@ -1,0 +1,288 @@
+# Project 4: Number Guessing Game with GUI
+
+## Description
+An interactive number guessing game with a graphical user interface (GUI) built using Tkinter. Players guess a random number between 1-100 with up to 10 attempts, receiving feedback (Too High/Too Low) after each guess.
+
+## Skills Learned
+- ✅ Tkinter GUI development
+- ✅ Object-oriented programming (OOP)
+- ✅ Event handling (button clicks, key presses)
+- ✅ Random number generation
+- ✅ Game logic and state management
+- ✅ GUI layout (frames, widgets, packing)
+- ✅ Message boxes and user feedback
+
+## How to Run
+```bash
+python number_guessing_game.py
+```
+
+**Note:** Tkinter comes built-in with Python. No additional installation needed!
+
+## Features
+✅ Beautiful GUI interface with colors
+✅ Random number generation (1-100)
+✅ Real-time feedback (Too High/Too Low)
+✅ Attempt counter (max 10 attempts)
+✅ Guess history tracking
+✅ Hint system
+✅ Win/Lose conditions
+✅ New Game option
+✅ Message boxes for notifications
+
+## GUI Components
+```
+Title Bar
+├── Title Label (🎮 NUMBER GUESSING GAME)
+└── Subtitle (Guess a number between 1 and 100)
+
+Instructions
+├── Guess rules
+└── Help text
+
+Game Stats
+└── Attempts counter (X/10)
+
+Input Section
+├── Text entry field
+└── "Check Guess" button
+
+Control Buttons
+├── ✓ Check Guess button
+├── 💡 Get Hint button
+└── 🔄 New Game button
+
+Feedback Section
+└── Feedback label (Too High/Too Low/Correct)
+
+History Section
+└── Listbox showing all previous guesses
+```
+
+## Sample Output / GUI Walkthrough
+
+### Screenshot 1: Initial Game Start
+```
+┌─────────────────────────────────┐
+│  🎮 NUMBER GUESSING GAME        │
+│                                 │
+│ Guess a number between 1 and 100│
+├─────────────────────────────────┤
+│                                 │
+│ 📝 Instructions:                │
+│ • Guess a random number         │
+│ • You have 10 attempts          │
+│ • Get hints: Too High or Low    │
+│                                 │
+│ Attempts: 0/10                  │
+│                                 │
+│ Enter your guess:               │
+│    [          ]                 │
+│                                 │
+│ [✓ Check] [💡 Hint] [🔄 New]   │
+│                                 │
+│ 🎯 Start guessing!              │
+│                                 │
+│ 📋 Guess History:               │
+│ ┌──────────────────────────┐   │
+│ │ (empty)                  │   │
+│ └──────────────────────────┘   │
+└─────────────────────────────────┘
+```
+
+### Screenshot 2: First Guess (Too High)
+```
+Enter your guess:
+    [50]
+
+🎯 After clicking "Check":
+
+📉 Too High!
+Try a smaller number
+(9 attempts remaining)
+
+📋 Guess History:
+Attempt 1: 50
+```
+
+### Screenshot 3: Second Guess (Too Low)
+```
+Enter your guess:
+    [25]
+
+🎯 After clicking "Check":
+
+📈 Too Low!
+Try a larger number
+(8 attempts remaining)
+
+📋 Guess History:
+Attempt 1: 50
+Attempt 2: 25
+```
+
+### Screenshot 4: Using Hint
+```
+Click "💡 Get Hint" button
+
+Message Box:
+┌────────────┐
+│ 💡 Hint    │
+├────────────┤
+│ The number│
+│ is higher │
+│ than 25   │
+└────────────┘
+```
+
+### Screenshot 5: Correct Guess (Win)
+```
+Enter your guess:
+    [42]
+
+🎯 After clicking "Check":
+
+🎉 Congratulations!
+You found the number 42
+in 3 attempts!
+
+Message Box:
+┌──────────────────────┐
+│ 🎉 Winner!           │
+├──────────────────────┤
+│ You found the number │
+│ 42 in 3 attempts!    │
+│                      │
+│ Amazing! 🌟          │
+│                      │
+│      [OK]            │
+└──────────────────────┘
+
+Attempts: 3/10
+
+📋 Guess History:
+Attempt 1: 50
+Attempt 2: 25
+Attempt 3: 42
+```
+
+### Screenshot 6: Game Over (Lose)
+```
+After 10 failed attempts:
+
+💔 Game Over!
+The number was 37
+Better luck next time!
+
+Message Box:
+┌──────────────────────┐
+│ 💔 Game Over         │
+├──────────────────────┤
+│ You've used all 10   │
+│ attempts!            │
+│ The secret number    │
+│ was: 37              │
+│                      │
+│      [OK]            │
+└──────────────────────┘
+```
+
+### Screenshot 7: New Game
+```
+Click "🔄 New Game" button
+
+Message Box:
+┌──────────────────────┐
+│ 🔄 New Game          │
+├──────────────────────┤
+│ Game has been reset! │
+│ Guess a new number   │
+│ between 1 and 100    │
+│                      │
+│      [OK]            │
+└──────────────────────┘
+
+Attempts: 0/10 (RESET)
+History: CLEARED
+🎯 Start guessing!
+```
+
+## Code Structure
+```
+NumberGuessingGame class
+├── __init__()              → Initialize game
+├── create_widgets()        → Create GUI elements
+├── check_guess()           → Validate and check guess
+├── get_hint()              → Provide hint
+└── reset_game()            → Reset for new game
+
+main()                       → Entry point
+```
+
+## Game Logic
+1. Random number generated between 1-100
+2. Player enters guess (1-100)
+3. System gives feedback:
+   - "Too High" if guess > secret number
+   - "Too Low" if guess < secret number
+   - "Correct!" if guess == secret number
+4. Attempts counter decreases
+5. Game ends when:
+   - Player finds the number (WIN)
+   - Player uses all 10 attempts (LOSE)
+
+## Key Features Explained
+
+### Event Binding
+```python
+# Check guess on button click
+command=self.check_guess
+
+# Check guess on Enter key press
+self.guess_entry.bind("<Return>", lambda e: self.check_guess())
+```
+
+### Game State Management
+```python
+self.secret_number    # Stores the random number
+self.attempts         # Tracks attempts used
+self.game_over        # Tracks game status
+self.history          # Stores all guesses
+```
+
+### Feedback System
+- Color coding (Red for errors, Green for success, Orange for hints)
+- Real-time attempt counter updates
+- History tracking in listbox
+- Message boxes for important events
+
+## What I Learned
+1. **GUI Programming** - Creating windows and widgets
+2. **OOP Concepts** - Using classes to organize code
+3. **Event Handling** - Responding to user actions
+4. **Game Logic** - Implementing game rules
+5. **State Management** - Tracking game state
+6. **User Experience** - Creating interactive applications
+7. **Error Handling** - Validating user input
+8. **Layout Management** - Organizing GUI elements
+
+## Dependencies
+- **tkinter** (Built-in with Python)
+- **random** (Built-in with Python)
+
+No external packages needed!
+
+## Advanced Features
+- Multiple color schemes
+- Message box notifications
+- Auto-focus on input field
+- Press Enter to submit guess
+- Automatic scrolling in history
+- Game state validation
+- Input range validation
+- Visual feedback with emojis
+
+---
+**Status:** ✅ Completed  
+**Level:** Level 2 - Intermediate   
+**GUI Library:** Tkinter (Built-in)
